@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { FeedbackOptions } from 'components/ListButton/FeedbackOptions';
 import { Statistics } from 'components/Stats/Statistics';
 import { Notification } from 'components/Notification/Notification';
@@ -44,7 +44,7 @@ export class Section extends React.Component {
           
           <h1>{this.title}</h1>
             {<FeedbackOptions option={1} onLeaveFeedback={this.eventsAddFeed} />}
-           {this.countTotalFeedback() == 0? <Notification message="There is no feedback" />:
+           {this.countTotalFeedback() === 0? <Notification message="There is no feedback" />:
             <Statistics
                 good={this.state.good}
                 neutral={this.state.neutral}

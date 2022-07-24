@@ -1,5 +1,5 @@
-import React, { Children } from 'react';
-import PropTypes, { number } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { List } from './Stats.styled';
 
 export const Statistics = ({good, neutral, bad, total, positivePercentage})=>    

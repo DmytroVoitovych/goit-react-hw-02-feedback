@@ -22,20 +22,12 @@ export class Section extends React.Component {
         bad: 0
     }
         
-    addFeedBackGood = (value) => this.setState((prevState) => ({good: prevState.good +value}));
-    addFeedBackNeutral = (value) => this.setState(prevState => ({ neutral: prevState.neutral + value, }));
-    addFeedBackBad = (value) => this.setState(prevState => ({ bad: prevState.bad + value, }));
-
-     countTotalFeedback = ()=> Object.values(this.state).reduce(
-         (previousValue, currentValue) => previousValue + currentValue + 0);
+    addFeedBackGood = (e) => {return this.setState((prevState) => ({ [e]: prevState[e] + 1 })) }; // не то 'е' о котором можно было подумать. 
+        
+     countTotalFeedback = ()=> Object.values(this.state).reduce((previousValue, currentValue) => previousValue + currentValue + 0);//тотал 
     
-    countPositiveFeedbackPercentage = (total) =>  Math.round((this.state.good / this.countTotalFeedback()*100)) + "%" ;
+    countPositiveFeedbackPercentage = () =>  Math.round((this.state.good / this.countTotalFeedback()*100)) + "%" ; // процент
 
-    eventsAddFeed = {
-        good: this.addFeedBackGood,
-        neutral: this.addFeedBackNeutral,
-        bad: this.addFeedBackBad,
-    };
     
     
     render() {
@@ -43,7 +35,7 @@ export class Section extends React.Component {
         return (<section>
           
           <h1>{this.title}</h1>
-            {<FeedbackOptions option={1} onLeaveFeedback={this.eventsAddFeed} />}
+            {<FeedbackOptions option={[...Object.keys(this.state)]} onLeaveFeedback={this.addFeedBackGood} />}
            {this.countTotalFeedback() === 0? <Notification message="There is no feedback" />:
             <Statistics
                 good={this.state.good}

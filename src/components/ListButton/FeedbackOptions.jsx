@@ -1,17 +1,21 @@
 import React from 'react';
+import { List } from './FeedbackOptions.styled';
+import { Button } from './FeedbackOptions.styled';
 import PropTypes from 'prop-types';
-import { List, Button } from './FeedbackOptions.styled';
+// var toArray = require('lodash.toarray');
+
 export const FeedbackOptions = ({option, onLeaveFeedback }) => {
                     
               return  < List >
-            <li><Button type='button' onClick={()=>onLeaveFeedback.good(option)}>Good</Button></li>
-            <li><Button type='button' onClick={()=>onLeaveFeedback.neutral(option)}>Neutral</Button></li>
-            <li><Button type='button' onClick={()=>onLeaveFeedback.bad(option)} >Bad</Button></li>
-        
-        </List> 
+                  {option.map((opt, index, arr) => {
+                      return (<li key={index}>
+                          <Button type='button' onClick={() => onLeaveFeedback(opt)}>{opt}</Button>
+                      </li>)
+                  })}
+                       </List> 
 };
 
  FeedbackOptions.propTypes = {
-     onLeaveFeedback: PropTypes.objectOf(PropTypes.func).isRequired,
-     option: PropTypes.number.isRequired
+     onLeaveFeedback: PropTypes.func.isRequired,
+     option: PropTypes.arrayOf(PropTypes.string).isRequired
     };
